@@ -1,0 +1,37 @@
+authorName: WeiTongLong
+experimentName: Porto_0.25
+#并发数
+trialConcurrency: 1
+#最大运行时间
+maxExecDuration: 400h
+#最大尝试次数
+maxTrialNum: 1
+nniManagerIp: 172.31.41.138
+# 可选项: local, remote, pai
+trainingServicePlatform: pai
+searchSpacePath: /data2/WeiTongLong/trajectory/openpai/nni/params/CD.json
+useAnnotation: false
+tuner:
+    builtinTunerName: TPE
+    classArgs:
+    #maximize or minimize
+        optimize_mode: minimize
+
+trial:
+    #command: cd /mnt/nfs-storage2 #&& bash make.sh && cd .. && python3 train.py
+    command: python multi_main.py --keep_ratio 0.125 --top_K 2
+    codeDir: ./
+    gpuNum: 1
+    cpuNum: 4
+    memoryMB: 30720
+    virtualCluster: default
+    image: a4-1:5000/weitl_1/pytorch:latest
+    containerNFSMountPath: /mnt/nfs-storage-node-18/trajectory_impu
+    nniManagerNFSMountPath: /mnt/nfsData18/WeiTongLong/trajectory_impu
+    paiStorageConfigName: nfs-storage-node-18
+    # shmMB:  40960
+
+paiConfig:
+    userName: WeiTongLong
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IldlaVRvbmdMb25nIiwiYXBwbGljYXRpb24iOmZhbHNlLCJqb2JTcGVjaWZpYyI6ZmFsc2UsImVuY29kZWRGcmFtZXdvcmtOYW1lIjoiIiwiaWF0IjoxNjg1MzQ4MDI5LCJleHAiOjE2ODU5NTI4Mjl9.WihMNg3qEOYUGV-H9zyJqEcAEq0aW1J5YZoPp9-dnrM
+    host: http://172.31.41.146/
