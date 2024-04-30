@@ -1,17 +1,19 @@
-# MM-STGED
+## MM-STGED
 
-# Dataset:
-Download the raw GPS trajectory data by following URL:
+Source code of TKDE:  Micro-Macro Spatial-Temporal Graph-based  Encoder-Decoder for Map-Constrained Trajectory Recovery
 
-**Porto**: https://www.kaggle.com/competitions/pkdd-15-predict-taxi-service-trajectory-i/data
+## Dataset
 
-**Chengdu**: https://pan.baidu.com/s/1bivXIGZ21wdEX1jqnaM56A?pwd=737d     Password:737d
+We provide sample data under data/.
 
-The map-matched dataset will be released later.
+**Generation macro trajectory flow graph**:
 
-# Running code:
-You can run the following command to train the model at the Porto and Chengdu datasets:
+> python build_graph.py
 
-**Porto**: python multi_main.py --dataset Porto
+**Generation traffic condition**:
 
-**Chengdu**: python multi_main.py --dataset Chengdu
+> python cal_road_condition.py
+
+**Running**:
+
+> python multi_main.py

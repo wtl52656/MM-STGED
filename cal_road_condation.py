@@ -55,14 +55,10 @@ def cal_flow(file_path):
 
                     res_data[hour, lng_index, lat_index] += 1
     return res_data
-#生成轨迹
-# file_path = "/data/WeiTongLong/trajectory/pre_process/data/Porto/train/"
-# res_data = cal_flow(file_path)
-# np.save("flow.npy", res_data)
-
-data = np.load("flow.npy")[2]
-# data[data>1000]=1000
-print(data.shape)
-plt.imshow(data)
-plt.colorbar()
-plt.show()
+    
+# 生成路况数据
+if __name__ == '__main__':
+    dataset = "Porto"
+    file_path = "/data/WeiTongLong/trajectory/pre_process/data/{}/train/".format(dataset)
+    res_data = cal_flow(file_path)
+    np.save("flow.npy", res_data)

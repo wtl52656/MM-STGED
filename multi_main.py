@@ -6,7 +6,7 @@ import sys
 import argparse
 import pandas as pd
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import torch
 import torch.optim as optim
 import numpy as np
@@ -189,58 +189,18 @@ if __name__ == '__main__':
     args.update(args_dict)
 
     print('Preparing data...')
-    
-    # extra_info_dir = "./data/" + opts.dataset + "/extro_data/"
-    # rn_dir = "./data/" + opts.dataset + "/rn_dir/"
-    # user_dir = json.load(open( "./data/" + opts.dataset + "/extro_data/uid2index.json" ))
-    # train_trajs_dir = "./data/" + opts.dataset + "/train/"
-    # valid_trajs_dir = "./data/" + opts.dataset + "/valid/"
-    # test_trajs_dir = "./data/" + opts.dataset + "/test/"
-    # SE_file = './data/' + opts.dataset + '/' + opts.dataset + '_SE.txt'
-    # condition_file = "./data/" + opts.dataset + "/extro_data/flow.npy"
-    # road_file = './data/' + opts.dataset + '/graph_A.csv'
 
-    # extra_info_dir = "/data2/WeiTongLong/trajectory/pre_process/chengdu_process/extro_data/"
-    # rn_dir = "/data2/WeiTongLong/trajectory/pre_process/osm2rn-master/result/chengdu/"
-    # user_dir = json.load(open( "/data2/WeiTongLong/trajectory/pre_process/data/CD_user/uid2index.json" ))
-    # train_trajs_dir = "/data2/WeiTongLong/trajectory/pre_process/data/CD_user/train/"
-    # valid_trajs_dir = "/data2/WeiTongLong/trajectory/pre_process/data/CD_user/valid/"
-    # test_trajs_dir = "/data2/WeiTongLong/trajectory/pre_process/data/CD_user/test/"
-    # road_file = '/data2/WeiTongLong/trajectory/MTrajRec_test/save_graph/CD/graph_A.csv'
-    # SE_file = '/data2/WeiTongLong/trajectory/node2vec/CD/CD_SE.txt'
-    # condition_file = '/data2/WeiTongLong/trajectory/openpai/my_model/condition_topMask_user_vec/flow_15min.npy'
-    if opts.dataset == 'Porto':
+    train_trajs_dir = "./data/{}/train/".format(opts.dataset)
+    valid_trajs_dir = "./data/{}/valid/".format(opts.dataset)
+    test_trajs_dir = "./data/{}/test/".format(opts.dataset)
 
-        # /mnt/nfsData18/WeiTongLong/
-        
-        extra_info_dir = "/mnt/nfs-storage-node-18/data/Porto/extro_data/"
-        rn_dir = "/mnt/nfs-storage-node-18/data/Porto/road_network/"
-        train_trajs_dir = "/mnt/nfs-storage-node-18/data/Porto_user/train/"
-        valid_trajs_dir = "/mnt/nfs-storage-node-18/data/Porto_user/valid/"
-        test_trajs_dir = "/mnt/nfs-storage-node-18/data/Porto_user/test/"
-        user_dir = json.load(open( "/mnt/nfs-storage-node-18/data/Porto_user/uid2index.json" ))
-        SE_file = '/mnt/nfs-storage-node-18/data/Porto/node2vec/Porto_SE.txt'
-        condition_file = "/mnt/nfs-storage-node-18/data/Porto/extro_data/flow.npy"
-        road_file = '/mnt/nfs-storage-node-18/data/Porto/save_graph/graph_A.csv'
-
-    elif opts.dataset == 'Chengdu':
-        extra_info_dir = "/mnt/nfs-storage-node-18/data/CD/extro_data/"
-        rn_dir = "/mnt/nfs-storage-node-18/data/CD/road_network/"
-        train_trajs_dir = "/mnt/nfs-storage-node-18/data/CD_user/train/"
-        valid_trajs_dir = "/mnt/nfs-storage-node-18/data/CD_user/valid/"
-        test_trajs_dir = "/mnt/nfs-storage-node-18/data/CD_user/test/"
-        user_dir = json.load(open( "/mnt/nfs-storage-node-18/data/CD_user/uid2index.json" ))
-        SE_file = '/mnt/nfs-storage-node-18/data/CD/node2vec/CD_SE.txt'
-        if opts.RD_inter == '15min':
-            condition_file = "/mnt/nfs-storage-node-18/data/CD/extro_data/flow_15min.npy"
-        elif opts.RD_inter == '30min':
-            condition_file = "/mnt/nfs-storage-node-18/data/CD/extro_data/flow_30min.npy"
-        elif opts.RD_inter == '1h':
-            condition_file = "/mnt/nfs-storage-node-18/data/CD/extro_data/flow_CD.npy"
-        elif opts.RD_inter == '48h':
-            condition_file = "/mnt/nfs-storage-node-18/data/CD/extro_data/flow_48h.npy"
-
-        road_file = '/mnt/nfs-storage-node-18/data/CD/save_graph/graph_A.csv'
+    extra_info_dir = "./data/{}/extra_data/".format(opts.dataset)
+    rn_dir = extra_info_dir + "road_network/"
+    user_dir = json.load(open( extra_info_dir + "uid2index.json"))
+    SE_file = extra_info_dir + '{}_SE.txt'.format(opts.dataset)
+    condition_file = extra_info_dir + 'flow.npy'
+    # road_file = extra_info_dir + 'graph_A.csv'
+    road_file = "/data/WeiTongLong/data/traj_recover/Porto/graph_A.csv"
 
     if args.tandem_fea_flag:
         fea_flag = True

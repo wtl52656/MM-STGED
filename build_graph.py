@@ -239,34 +239,34 @@ def calculate_laplacian_matrix(adj_mat, mat_type):
         raise ValueError(f'ERROR: {mat_type} is unknown.')
 
 
-# if __name__ == '__main__':
-#     import json
-#     dst_dir = './data/Porto/train/'
-#     json_dir = './data/Porto/extro_data/'
-#     with open(json_dir + 'new2raw_rid.json', "r") as f:
-#         new2raw_rid = json.load(f)
-#     with open(json_dir + 'raw_rn_dict.json', "r") as f:
-#         raw_rn_dict = json.load(f)
-#     # 'min_lat':41.142,
-#     # 'min_lng':-8.652,
-#     # 'max_lat':41.174,
-#     # 'max_lng':-8.578,
-#     mbr = MBR(41.142, -8.652, 41.174, -8.578)
-#     grid_size = 50
-#     # Build POI checkin trajectory graph
-#     # train_df = pd.read_csv(os.path.join(dst_dir, 'NYC_train.csv'))
-#     print('Build global POI checkin graph -----------------------------------')
-#     G = build_global_POI_checkin_graph(dst_dir, new2raw_rid, raw_rn_dict, mbr, grid_size)
-#     nodelist = G.nodes()
-#     print(len(nodelist))
-#     A = nx.adjacency_matrix(G, nodelist=nodelist)
-#     print(A.shape)
-#     # Save graph to disk
-#     save_G_path = './Porto/extro_data/'
-#     print("save to pickle...")
-#     save_graph_to_pickle(G, dst_dir=save_G_path)
-#     print("save to csv...")
-#     save_graph_to_csv(G, dst_dir=save_G_path)
-#     print("save to edgelist...")
-#     save_graph_edgelist(G, dst_dir=save_G_path)
-#     print("ok")
+if __name__ == '__main__':
+    import json
+    dst_dir = './data/Porto/train/'
+    json_dir = './data/Porto/extra_data/'
+    with open(json_dir + 'new2raw_rid.json', "r") as f:
+        new2raw_rid = json.load(f)
+    with open(json_dir + 'raw_rn_dict.json', "r") as f:
+        raw_rn_dict = json.load(f)
+    # 'min_lat':41.142,
+    # 'min_lng':-8.652,
+    # 'max_lat':41.174,
+    # 'max_lng':-8.578,
+    mbr = MBR(41.142, -8.652, 41.174, -8.578)
+    grid_size = 50
+    # Build POI checkin trajectory graph
+    # train_df = pd.read_csv(os.path.join(dst_dir, 'NYC_train.csv'))
+    print('Build global POI checkin graph -----------------------------------')
+    G = build_global_POI_checkin_graph(dst_dir, new2raw_rid, raw_rn_dict, mbr, grid_size)
+    nodelist = G.nodes()
+    print(len(nodelist))
+    A = nx.adjacency_matrix(G, nodelist=nodelist)
+    print(A.shape)
+    # Save graph to disk
+    save_G_path = './Porto/extro_data/'
+    print("save to pickle...")
+    save_graph_to_pickle(G, dst_dir=save_G_path)
+    print("save to csv...")
+    save_graph_to_csv(G, dst_dir=save_G_path)
+    print("save to edgelist...")
+    save_graph_edgelist(G, dst_dir=save_G_path)
+    print("ok")
