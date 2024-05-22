@@ -199,9 +199,8 @@ if __name__ == '__main__':
     user_dir = json.load(open( extra_info_dir + "uid2index.json"))
     SE_file = extra_info_dir + '{}_SE.txt'.format(opts.dataset)
     condition_file = extra_info_dir + 'flow.npy'
-    # road_file = extra_info_dir + 'graph_A.csv'
-    road_file = "/data/WeiTongLong/data/traj_recover/Porto/graph_A.csv"
-
+    road_file = extra_info_dir + 'TLG/graph_A.csv'
+    
     if args.tandem_fea_flag:
         fea_flag = True
     else:

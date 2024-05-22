@@ -65,7 +65,7 @@ def build_global_POI_checkin_graph(dst_dir, new2raw_rid, raw_rn_dict, mbr, grid_
     for filename in tqdm(os.listdir(dst_dir)):
         #第一步，先解析轨迹
         
-        trajs = parser.parse(os.path.join(dst_dir, filename))
+        trajs = parser.parse_graph(os.path.join(dst_dir, filename))
         # print("filename:", filename)
         for traj in trajs:
             cnt += 1
@@ -262,7 +262,9 @@ if __name__ == '__main__':
     A = nx.adjacency_matrix(G, nodelist=nodelist)
     print(A.shape)
     # Save graph to disk
-    save_G_path = './Porto/extro_data/'
+    save_G_path = json_dir + 'TLG/'
+    if not os.path.exists(save_G_path):
+        os.makedirs(save_G_path)
     print("save to pickle...")
     save_graph_to_pickle(G, dst_dir=save_G_path)
     print("save to csv...")

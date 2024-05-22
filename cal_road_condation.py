@@ -59,6 +59,7 @@ def cal_flow(file_path):
 # 生成路况数据
 if __name__ == '__main__':
     dataset = "Porto"
-    file_path = "/data/WeiTongLong/trajectory/pre_process/data/{}/train/".format(dataset)
+    file_path = "./data/{}/train/".format(dataset)
+    save_path = "./data/{}/extra_data/".format(dataset)
     res_data = cal_flow(file_path)
-    np.save("flow.npy", res_data)
+    np.save(save_path + "flow.npy", res_data)
